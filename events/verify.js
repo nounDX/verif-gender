@@ -5,48 +5,61 @@ export default {
 
         if (!interaction.isButton()) return;
 
-        // ================= GIRL =================
-        if (interaction.customId === 'girl_verify') {
+        try {
 
-            const girl = interaction.guild.roles.cache.find(
-                r => r.name === 'GIRL'
-            );
+            // ================= GIRL =================
+            if (interaction.customId === 'girl_verify') {
 
-            if (!girl) {
+                const girl = interaction.guild.roles.cache.find(
+                    r => r.name === 'GIRL'
+                );
+
+                if (!girl) {
+                    return interaction.reply({
+                        content: '❌ Role GIRL belum ada.',
+                        ephemeral: true
+                    });
+                }
+
+                await interaction.member.roles.add(girl);
+
                 return interaction.reply({
-                    content: '❌ Role GIRL belum ada.',
+                    content: '✅ Kamu mendapatkan role GIRL.',
                     ephemeral: true
                 });
             }
 
-            await interaction.member.roles.add(girl);
+            // ================= BOY =================
+            if (interaction.customId === 'boy_verify') {
 
-            return interaction.reply({
-                content: '✅ Kamu mendapatkan role GIRL.',
-                ephemeral: true
-            });
-        }
+                const boy = interaction.guild.roles.cache.find(
+                    r => r.name === 'BOY'
+                );
 
-        // ================= BOY =================
-        if (interaction.customId === 'boy_verify') {
+                if (!boy) {
+                    return interaction.reply({
+                        content: '❌ Role BOY belum ada.',
+                        ephemeral: true
+                    });
+                }
 
-            const boy = interaction.guild.roles.cache.find(
-                r => r.name === 'BOY'
-            );
+                await interaction.member.roles.add(boy);
 
-            if (!boy) {
                 return interaction.reply({
-                    content: '❌ Role BOY belum ada.',
+                    content: '✅ Kamu mendapatkan role BOY.',
                     ephemeral: true
                 });
             }
 
-            await interaction.member.roles.add(boy);
+        } catch (error) {
+            console.error(error);
 
-            return interaction.reply({
-                content: '✅ Kamu mendapatkan role BOY.',
-                ephemeral: true
-            });
+            if (!interaction.replied && !interaction.deferred) {
+                return interaction.reply({
+                    content: '❌ Terjadi error pada bot.',
+                    ephemeral: true
+                });
+            }
         }
     }
 };
