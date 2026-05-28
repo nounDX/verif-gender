@@ -44,6 +44,16 @@ for (const file of eventFiles) {
 
     const event = await import(`./events/${file}`);
 
+    if (!event.default) {
+        console.log(`❌ Event ${file} tidak punya export default`);
+        continue;
+    }
+
+    if (!event.default.name || !event.default.execute) {
+        console.log(`❌ Format event salah: ${file}`);
+        continue;
+    }
+
     client.on(
         event.default.name,
         (...args) => event.default.execute(...args)
@@ -51,7 +61,7 @@ for (const file of eventFiles) {
 }
 
 // ================= READY =================
-client.once('clientReady', () => {
+client.once('ready', () => {
 
     console.log(`✅ Bot online sebagai ${client.user.tag}`);
 
