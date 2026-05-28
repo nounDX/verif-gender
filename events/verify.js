@@ -19,14 +19,11 @@ export default {
                 });
             }
 
-            // KASIH ROLE
             await interaction.member.roles.add(girl);
 
-            // EDIT PESAN SETELAH DIPENCET
-            return interaction.update({
+            return interaction.reply({
                 content: '✅ Kamu mendapatkan role GIRL.',
-                embeds: [],
-                components: []
+                ephemeral: true
             });
         }
 
@@ -44,14 +41,11 @@ export default {
                 });
             }
 
-            // KASIH ROLE
             await interaction.member.roles.add(boy);
 
-            // EDIT PESAN SETELAH DIPENCET
-            return interaction.update({
+            return interaction.reply({
                 content: '✅ Kamu mendapatkan role BOY.',
-                embeds: [],
-                components: []
+                ephemeral: true
             });
         }
     }

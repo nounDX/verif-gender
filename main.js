@@ -50,41 +50,14 @@ for (const file of eventFiles) {
     );
 }
 
-// ================= SLASH COMMAND =================
-client.on('interactionCreate', async interaction => {
-
-    if (!interaction.isChatInputCommand()) return;
-
-    const command = client.commands.get(
-        interaction.commandName
-    );
-
-    if (!command) return;
-
-    try {
-
-        await command.execute(interaction);
-
-    } catch (error) {
-
-        console.error(error);
-
-    }
-});
-
 // ================= READY =================
-client.once('clientReady', () => {
+client.once('ready', () => {
 
-    console.log(
-        `✅ Bot online sebagai ${client.user.tag}`
-    );
+    console.log(`✅ Bot online sebagai ${client.user.tag}`);
 
-    client.user.setActivity(
-        '/help | verifgender.xyz',
-        {
-            type: ActivityType.Watching
-        }
-    );
+    client.user.setActivity('/help | verifgender.xyz', {
+        type: ActivityType.Watching
+    });
 });
 
 // ================= LOGIN =================
