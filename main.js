@@ -51,13 +51,14 @@ for (const file of eventFiles) {
 }
 
 // ================= READY =================
-client.once('ready', () => {
+client.once('clientReady', () => {
 
     console.log(`✅ Bot online sebagai ${client.user.tag}`);
 
     client.user.setActivity('/help | verifgender.xyz', {
         type: ActivityType.Watching
     });
+
 });
 
 // ================= LOGIN =================
